@@ -3,7 +3,7 @@ const RUKN_CONFIG = {
   contacts: {
     whatsappUsername: 'RuknSales',
     telegramUsername: 'RuknSales',
-    email: 'Sales@Ruknservers.com'
+    email: 'sales@ruknservers.com'
   },
   products: [
     {
