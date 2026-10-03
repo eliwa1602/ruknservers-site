@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /server.py
+Disallow: /docs/
+Disallow: /skill/
+Disallow: /__pycache__/
+Sitemap: https://ruknservers.com/sitemap.xml
