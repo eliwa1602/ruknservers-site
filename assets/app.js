@@ -167,6 +167,9 @@ function selectChannel(channel) {
 function openOrder(productId, button) {
   const product = RUKN_CONFIG.products.find((item) => item.id === productId);
   if (!product) return;
+  if (window.location.hash !== '#checkout') {
+    window.history.pushState({ checkout: true }, '', `${window.location.pathname}${window.location.search}#checkout`);
+  }
   state.product = product;
   state.opener = button;
   $('#orderTitle').textContent = product.name;
@@ -313,5 +316,11 @@ document.addEventListener('change', (event) => {
 });
 $('#sendOrder').addEventListener('click', sendOrder);
 dialog.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
-dialog.addEventListener('close', () => state.opener?.focus());
+dialog.addEventListener('close', () => {
+  state.opener?.focus();
+  if (window.location.hash === '#checkout') {
+    window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
+  }
+});
+window.addEventListener('popstate', () => { if (dialog.open) dialog.close(); });
 renderCatalog();
