@@ -167,6 +167,16 @@ function selectChannel(channel) {
 function openOrder(productId, button) {
   const product = RUKN_CONFIG.products.find((item) => item.id === productId);
   if (!product) return;
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', 'configure_click', {
+      event_category: 'server_catalog',
+      event_label: product.name,
+      server_name: product.name,
+      server_family: product.family,
+      value: product.price,
+      currency: 'USD'
+    });
+  }
   if (window.location.hash !== '#checkout') {
     window.history.pushState({ checkout: true }, '', `${window.location.pathname}${window.location.search}#checkout`);
   }
