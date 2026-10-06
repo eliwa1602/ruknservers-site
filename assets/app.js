@@ -265,6 +265,16 @@ function sendOrder() {
   }
   $('#formError').textContent = '';
   const message = orderMessage();
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', `${state.channel}_click`, {
+      event_category: 'lead_contact',
+      event_label: state.product.name,
+      contact_method: state.channel,
+      server_name: state.product.name,
+      server_price: state.product.price,
+      currency: 'USD'
+    });
+  }
   const destination = RUKN_CONFIG.contacts[state.channel === 'whatsapp' ? 'whatsappUsername' : state.channel === 'telegram' ? 'telegramUsername' : 'email'];
   if (!destination) {
     const notice = 'Your order details are ready. Official contact details are not connected yet; copy the message below and share it when RUKN publishes its contact route.';
