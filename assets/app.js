@@ -274,6 +274,14 @@ function sendOrder() {
       server_price: state.product.price,
       currency: 'USD'
     });
+    window.gtag('event', 'conversion', {
+      send_to: 'AW-10878250469/dIHbCO7tzJgdEOXbk8Mo',
+      value: 1,
+      currency: 'EUR',
+      contact_method: state.channel,
+      server_name: state.product.name
+    });
+
   }
   const destination = RUKN_CONFIG.contacts[state.channel === 'whatsapp' ? 'whatsappUsername' : state.channel === 'telegram' ? 'telegramUsername' : 'email'];
   if (!destination) {
